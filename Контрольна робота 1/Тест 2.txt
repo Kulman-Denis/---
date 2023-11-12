@@ -1,0 +1,36 @@
+// Клас, що представляє адресу
+class Address(val street: String, val city: String, val zipCode: String) {
+  override def toString: String = s"$street, $city, $zipCode"
+}
+
+// Клас, що представляє людину
+class Human(val name: String, val age: Int, val address: Address) {
+  // Характеристики можна додавати за потребою
+  // Наприклад:
+  // val gender: String
+  // val occupation: String
+
+  // Метод для отримання повної інформації про людину
+  def getDetails: String = s"Name: $name, Age: $age, Address: ${address.toString}"
+
+  // Метод для зміни адреси людини
+  def changeAddress(newAddress: Address): Unit = {
+    // Ми можемо змінювати адресу за допомогою цього методу
+    // Наприклад:
+    // address = newAddress   // Якщо використовується var замість val
+    // Або можна встановити додаткові правила для зміни адреси, якщо потрібно
+  }
+}
+
+// Приклад використання
+object Main extends App {
+  // Створення адреси
+  val address = new Address("Україна", "Прилуки", "12345")
+
+  // Створення людини зі зазначеною адресою
+  val person = new Human("Денис", 19, address)
+
+  // Виведення інформації про людину
+  println(person.getDetails)
+  // Зміна адреси людини
+}
