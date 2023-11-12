@@ -1,0 +1,40 @@
+object Main extends App {
+  val numbers = Array(5, 3, 8, 1, 10, 6, 7, 2, 4, 9)
+
+  def findMax(arr: Array[Int]): Int = arr.max
+
+  def findMin(arr: Array[Int]): Int = arr.min
+
+  def filterArray(arr: Array[Int], condition: Int => Boolean): Array[Int] = arr.filter(condition)
+
+  def findElement(arr: Array[Int], condition: Int => Boolean): Option[Int] = arr.find(condition)
+
+  def doesExist(arr: Array[Int], condition: Int => Boolean): Boolean = arr.exists(condition)
+
+  def isArrayEmpty(arr: Array[Int]): Boolean = arr.isEmpty
+
+  def getHead(arr: Array[Int]): Option[Int] = arr.headOption
+
+  def getTail(arr: Array[Int]): Array[Int] = arr.tail
+
+  def calculateAverage(arr: Array[Int]): Double = {
+    if (arr.isEmpty) 0.0
+    else arr.sum.toDouble / arr.length
+  }
+
+  def calculateProduct(arr: Array[Int]): Int = {
+    if (arr.isEmpty) 0
+    else arr.product
+  }
+
+  println(s"Максимальний елемент: ${findMax(numbers)}")
+  println(s"Мінімальний елемент: ${findMin(numbers)}")
+  println(s"Фільтрований масив: ${filterArray(numbers, _ % 2 == 0).mkString(", ")}")
+  println(s"Знайдений елемент: ${findElement(numbers, _ > 5)}")
+  println(s"Чи існує елемент більший за 5: ${doesExist(numbers, _ > 5)}")
+  println(s"Чи порожній масив: ${isArrayEmpty(numbers)}")
+  println(s"Головний елемент: ${getHead(numbers)}")
+  println(s"Хвіст масиву: ${getTail(numbers).mkString(", ")}")
+  println(s"Середнє значення: ${calculateAverage(numbers)}")
+  println(s"Добуток елементів: ${calculateProduct(numbers)}")
+}

@@ -1,0 +1,19 @@
+class Address(val street: String, val city: String, val zipCode: String) {
+  override def toString: String = s"$street, $city, $zipCode"
+}
+
+class Human(val name: String, val age: Int, val address: Address) {
+
+  def getDetails: String = s"Name: $name, Age: $age, Address: ${address.toString}"
+
+  def changeAddress(newAddress: Address): Unit = {
+  }
+}
+
+object Main extends App {
+  val address = new Address("Україна", "Прилуки", "12345")
+
+  val person = new Human("Денис", 19, address)
+
+  println(person.getDetails)
+}

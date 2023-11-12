@@ -1,0 +1,50 @@
+class Human(val name: String, val age: Int) {
+  override def toString: String = s"Name: $name, Age: $age"
+}
+
+class ListHuman {
+  var humans: List[Human] = List()
+
+  def addHuman(human: Human): Unit = {
+    humans = humans :+ human
+  }
+
+  def deleteByName(name: String): Unit = {
+    humans = humans.filterNot(_.name == name)
+  }
+
+  def findByName(name: String): Option[Human] = {
+    humans.find(_.name == name)
+  }
+
+  def filterByCondition(condition: Human => Boolean): List[Human] = {
+    humans.filter(condition)
+  }
+
+  def printList(): Unit = {
+    humans.foreach(println)
+  }
+}
+
+object Main extends App {
+  val listHuman = new ListHuman
+
+  listHuman.addHuman(new Human("Алекс", 25))
+  listHuman.addHuman(new Human("Павло", 30))
+  listHuman.addHuman(new Human("Аліса", 22))
+
+  println("Before deletion:")
+  listHuman.printList()
+
+  listHuman.deleteByName("Алекс")
+
+  println("\nAfter deletion:")
+  listHuman.printList()
+
+  val foundPerson = listHuman.findByName("Павло")
+  println(s"\nFound person: $foundPerson")
+
+  val filteredList = listHuman.filterByCondition(_.age < 30)
+  println("\nFiltered list:, За віком менше 30")
+  filteredList.foreach(println)
+}
