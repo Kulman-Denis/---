@@ -252,7 +252,10 @@ int main() {
     cout << "Perimeter: " << Perimeter(length, width) << endl;
 
     // Task 11: Incorrect Code Fragment
-    // This code fragment is incorrect and needs to be fixed.
+    // Некоректне включення бібліотеки iostream: має бути #include <iostream>, а не #include <iostream.h>.
+    // Неправильний тип повернення для main: Функція main повинна повертати ціле число, а не void. Правильний вигляд виглядає так: int main().
+    // Некоректний спосіб виклику функції myFunc: При виклику функції треба передати конкретне значення або змінну, а не просто int.
+    // Неправильний тип повернення для функції myFunc : Функція myFunc оголошена з типом повернення void, але у визначенні функції використовується return 4 * a;. Слід змінити тип повернення на int
 
     // Task 12: Divide Two Numbers
     int numerator, denominator;
