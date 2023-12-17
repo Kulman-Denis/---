@@ -1,0 +1,71 @@
+class Address(val city: String, val country: String) {
+  def displayAddress(): String = {
+    s"$city, $country"
+  }
+}
+
+class Course(val name: String) {
+  override def toString: String = name
+}
+
+class Human(val lastName: String, val firstName: String, val age: Int, val gender: String, val address: Address, val courses: List[Course]) {
+  def displayInfo(): Unit = {
+    println(s"Name: $lastName $firstName, Age: $age years, Gender: $gender")
+    println(s"Address: ${address.displayAddress()}")
+    println(s"Courses: ${courses.mkString(", ")}")
+  }
+
+  def addCourses(coursesToAdd: List[Course]): Human = {
+    new Human(lastName, firstName, age, gender, address, courses ++ coursesToAdd)
+  }
+}
+
+class Student(lastName: String, firstName: String, age: Int, gender: String, address: Address, val grades: List[Int], courses: List[Course])
+  extends Human(lastName, firstName, age, gender, address, courses) {
+
+  override def addCourses(coursesToAdd: List[Course]): Student = {
+    new Student(lastName, firstName, age, gender, address, grades, courses ++ coursesToAdd)
+  }
+
+  override def displayInfo(): Unit = {
+    super.displayInfo()
+    println(s"Grades: ${grades.mkString(", ")}")
+  }
+}
+
+class Teacher(lastName: String, firstName: String, age: Int, gender: String, address: Address, override val courses: List[Course]) extends Human(lastName, firstName, age, gender, address, courses) {
+  override def displayInfo(): Unit = {
+    super.displayInfo()
+    println(s"Courses: ${courses.mkString(", ")}")
+  }
+
+  override def addCourses(coursesToAdd: List[Course]): Teacher = {
+    new Teacher(lastName, firstName, age, gender, address, courses ++ coursesToAdd)
+  }
+}
+
+object Main extends App {
+  // Створення курсів
+  val mathCourse = new Course("Math")
+  val historyCourse = new Course("History")
+
+  val students: List[Student] = List(
+    new Student("Kolchenko", "Fedor", 21, "Male", new Address("Odesa", "Ukraine"), List(86, 80, 88), List(mathCourse)),
+    new Student("Lashchenko", "Oleg", 23, "Male", new Address("Kherson", "Ukraine"), List(91, 85, 82), List(historyCourse)),
+    new Student("Baltacha", "Hleb", 21, "Male", new Address("Kherson", "Ukraine"), List(88, 75, 80), List(mathCourse)),
+    new Student("Atroshenko", "Magdalena", 22, "Female", new Address("Kyiv", "Ukraine"), List(94, 87, 93), List(historyCourse))
+  )
+
+  val teachers: List[Teacher] = List(
+    new Teacher("Lukina", "Tamara", 37, "Female", new Address("Kyiv", "Ukraine"), List(mathCourse)),
+    new Teacher("Belyakova", "Alena", 39, "Female", new Address("Ivano-Frankivsk", "Ukraine"), List(historyCourse))
+  )
+
+  // виведення інформації про студентів
+  println("Students:")
+  students.foreach(_.displayInfo())
+
+  // виведення інформації про вчителів
+  println("\nTeachers:")
+  teachers.foreach(_.displayInfo())
+}
